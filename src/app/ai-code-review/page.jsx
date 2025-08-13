@@ -29,7 +29,7 @@ import {
   Users,
   Activity
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { codeAnalysisService } from "@/lib/codeAnalysis";
 import { aiCodeReviewService } from "@/lib/aiCodeReview";
@@ -99,7 +99,7 @@ const categoryConfig = {
   }
 };
 
-export default function AICodeReview() {
+function AICodeReviewContent() {
   const searchParams = useSearchParams();
   const { user } = useAuth();
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -519,5 +519,19 @@ export default function AICodeReview() {
         </Card>
       </div>
     </DashboardLayout>
+  );
+}
+
+export default function AICodeReview() {
+  return (
+    <Suspense fallback={
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+        </div>
+      </DashboardLayout>
+    }>
+      <AICodeReviewContent />
+    </Suspense>
   );
 }
