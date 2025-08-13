@@ -264,80 +264,80 @@ function AICodeReviewContent() {
     <DashboardLayout>
       <div className="space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                 AI Code Review
               </h1>
-              <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 mt-1 text-xs sm:text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
-                  <GitBranch className="w-4 h-4" />
-                  {analysisResult.repository}
+                  <GitBranch className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span className="truncate">{analysisResult.repository}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <FileText className="w-4 h-4" />
-                  {analysisResult.filesAnalyzed} files
+                  <FileText className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span>{analysisResult.filesAnalyzed} files</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  Just now
+                  <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                  <span>Just now</span>
                 </div>
               </div>
             </div>
           </div>
-          <Button onClick={runAIAnalysis} variant="outline" className="border-purple-200 hover:bg-purple-50">
+          <Button onClick={runAIAnalysis} variant="outline" className="border-purple-200 hover:bg-purple-50 w-full sm:w-auto">
             <Activity className="w-4 h-4 mr-2" />
             Re-analyze
           </Button>
         </div>
 
         {/* Score Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 border-green-200 dark:border-green-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-green-700 dark:text-green-300">Quality Score</p>
-                  <p className="text-3xl font-bold text-green-600">{analysisResult.score.score}</p>
-                  <p className="text-sm text-green-600">{analysisResult.score.status}</p>
+                  <p className="text-xs sm:text-sm font-medium text-green-700 dark:text-green-300">Quality Score</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-green-600">{analysisResult.score.score}</p>
+                  <p className="text-xs sm:text-sm text-green-600">{analysisResult.score.status}</p>
                 </div>
-                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-green-600" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                 </div>
               </div>
-              <Progress value={analysisResult.score.score} className="mt-4 h-2" />
+              <Progress value={analysisResult.score.score} className="mt-3 sm:mt-4 h-2" />
             </CardContent>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 border-blue-200 dark:border-blue-800">
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Grade</p>
-                  <p className="text-3xl font-bold text-blue-600">{analysisResult.score.grade}</p>
-                  <p className="text-sm text-blue-600">Overall Rating</p>
+                  <p className="text-xs sm:text-sm font-medium text-blue-700 dark:text-blue-300">Grade</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-blue-600">{analysisResult.score.grade}</p>
+                  <p className="text-xs sm:text-sm text-blue-600">Overall Rating</p>
                 </div>
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
-                  <Target className="w-6 h-6 text-blue-600" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950 dark:to-violet-950 border-purple-200 dark:border-purple-800">
-            <CardContent className="p-6">
+          <Card className="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-950 dark:to-violet-950 border-purple-200 dark:border-purple-800 sm:col-span-2 lg:col-span-1">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-purple-700 dark:text-purple-300">Issues Found</p>
-                  <p className="text-3xl font-bold text-purple-600">{analysisResult.issues.length}</p>
-                  <p className="text-sm text-purple-600">Total Issues</p>
+                  <p className="text-xs sm:text-sm font-medium text-purple-700 dark:text-purple-300">Issues Found</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-purple-600">{analysisResult.issues.length}</p>
+                  <p className="text-xs sm:text-sm text-purple-600">Total Issues</p>
                 </div>
-                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center">
-                  <Bug className="w-6 h-6 text-purple-600" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Bug className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                 </div>
               </div>
             </CardContent>
@@ -345,20 +345,20 @@ function AICodeReviewContent() {
         </div>
 
         {/* Category Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {Object.entries(analysisResult.summary.categories).map(([category, count]) => {
             const config = categoryConfig[category];
             const Icon = config.icon;
             return (
               <Card key={category} className="hover:shadow-lg transition-all duration-200 hover:scale-105">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className={`w-10 h-10 ${config.bg} rounded-lg flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${config.color}`} />
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-center justify-between mb-2 sm:mb-3">
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 ${config.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${config.color}`} />
                     </div>
-                    <span className="text-2xl font-bold">{count}</span>
+                    <span className="text-xl sm:text-2xl font-bold">{count}</span>
                   </div>
-                  <p className="text-sm font-medium text-foreground">{config.name}</p>
+                  <p className="text-xs sm:text-sm font-medium text-foreground">{config.name}</p>
                 </CardContent>
               </Card>
             );
@@ -395,39 +395,41 @@ function AICodeReviewContent() {
         {/* Filters */}
         <Card>
           <CardContent className="p-4">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm font-medium">Filters:</span>
               </div>
-              <Select value={selectedSeverity} onValueChange={setSelectedSeverity}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Severity" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Severities</SelectItem>
-                  <SelectItem value="critical">Critical</SelectItem>
-                  <SelectItem value="high">High</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="low">Low</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 flex-1">
+                <Select value={selectedSeverity} onValueChange={setSelectedSeverity}>
+                  <SelectTrigger className="w-full sm:w-40">
+                    <SelectValue placeholder="Severity" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Severities</SelectItem>
+                    <SelectItem value="critical">Critical</SelectItem>
+                    <SelectItem value="high">High</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="low">Low</SelectItem>
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="w-full sm:w-40">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
+                    <SelectItem value="security">Security</SelectItem>
+                    <SelectItem value="performance">Performance</SelectItem>
+                    <SelectItem value="bugs">Bugs</SelectItem>
+                    <SelectItem value="codeSmells">Code Quality</SelectItem>
+                    <SelectItem value="bestPractices">Best Practices</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="security">Security</SelectItem>
-                  <SelectItem value="performance">Performance</SelectItem>
-                  <SelectItem value="bugs">Bugs</SelectItem>
-                  <SelectItem value="codeSmells">Code Quality</SelectItem>
-                  <SelectItem value="bestPractices">Best Practices</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <div className="ml-auto text-sm text-muted-foreground">
+              <div className="text-xs sm:text-sm text-muted-foreground text-center sm:text-right">
                 Showing {filteredIssues.length} of {analysisResult.issues.length} issues
               </div>
             </div>
@@ -463,48 +465,48 @@ function AICodeReviewContent() {
                   
                   return (
                     <Card key={index} className={`hover:shadow-md transition-all duration-200 ${severityConf.border}`}>
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4">
-                          <div className={`p-3 rounded-xl ${severityConf.bg}`}>
-                            <SeverityIcon className={`w-5 h-5 ${severityConf.color}`} />
+                      <CardContent className="p-4 sm:p-6">
+                        <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                          <div className={`p-2 sm:p-3 rounded-xl ${severityConf.bg} self-start`}>
+                            <SeverityIcon className={`w-4 h-4 sm:w-5 sm:h-5 ${severityConf.color}`} />
                           </div>
                           
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-3">
-                              <Badge className={categoryConf.bg + " " + categoryConf.color + " border-0"}>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-wrap items-center gap-2 mb-3">
+                              <Badge className={categoryConf.bg + " " + categoryConf.color + " border-0 text-xs"}>
                                 <CategoryIcon className="w-3 h-3 mr-1" />
                                 {categoryConf.name}
                               </Badge>
-                              <Badge className={severityConf.badge + " border-0"}>
+                              <Badge className={severityConf.badge + " border-0 text-xs"}>
                                 {issue.severity.toUpperCase()}
                               </Badge>
-                              <span className="text-sm text-muted-foreground font-mono">
+                              <span className="text-xs sm:text-sm text-muted-foreground font-mono break-all">
                                 {issue.file}:{issue.line}
                               </span>
                             </div>
                             
-                            <h4 className="font-semibold text-foreground mb-2 text-lg">
+                            <h4 className="font-semibold text-foreground mb-2 text-base sm:text-lg">
                               {issue.message}
                             </h4>
                             
-                            <p className="text-muted-foreground mb-4">
+                            <p className="text-muted-foreground mb-4 text-sm sm:text-base">
                               {issue.suggestion}
                             </p>
                             
-                            <div className="bg-muted/50 border rounded-lg p-4 font-mono text-sm overflow-x-auto">
-                              <pre className="whitespace-pre-wrap">{issue.code}</pre>
+                            <div className="bg-muted/50 border rounded-lg p-3 sm:p-4 font-mono text-xs sm:text-sm overflow-x-auto">
+                              <pre className="whitespace-pre-wrap break-words">{issue.code}</pre>
                             </div>
                             
                             {issue.confidence && (
                               <div className="mt-3 flex items-center gap-2">
-                                <div className="text-xs text-muted-foreground">AI Confidence:</div>
+                                <div className="text-xs text-muted-foreground whitespace-nowrap">AI Confidence:</div>
                                 <div className="flex-1 bg-muted rounded-full h-2">
                                   <div 
                                     className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300"
                                     style={{ width: `${issue.confidence * 100}%` }}
                                   ></div>
                                 </div>
-                                <span className="text-xs font-medium">{Math.round(issue.confidence * 100)}%</span>
+                                <span className="text-xs font-medium whitespace-nowrap">{Math.round(issue.confidence * 100)}%</span>
                               </div>
                             )}
                           </div>

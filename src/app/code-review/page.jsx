@@ -343,9 +343,9 @@ function CodeReviewContent() {
 
               <TabsContent value="issues" className="space-y-6">
                 {/* Filters */}
-                <div className="flex flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">Severity:</span>
+                <div className="space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:gap-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs sm:text-sm font-medium whitespace-nowrap">Severity:</span>
                     {["all", "error", "warning", "info"].map((severity) => (
                       <Button
                         key={severity}
@@ -354,14 +354,14 @@ function CodeReviewContent() {
                         }
                         size="sm"
                         onClick={() => setSelectedSeverity(severity)}
-                        className="capitalize"
+                        className="capitalize text-xs sm:text-sm h-7 sm:h-8 px-2 sm:px-3"
                       >
                         {severity}
                       </Button>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2 ml-4">
-                    <span className="text-sm font-medium">Category:</span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs sm:text-sm font-medium whitespace-nowrap">Category:</span>
                     {[
                       "all",
                       "security",
@@ -377,7 +377,7 @@ function CodeReviewContent() {
                         }
                         size="sm"
                         onClick={() => setSelectedCategory(category)}
-                        className="capitalize"
+                        className="capitalize text-xs sm:text-sm h-7 sm:h-8 px-2 sm:px-3"
                       >
                         {category}
                       </Button>
@@ -397,41 +397,41 @@ function CodeReviewContent() {
                           key={issue.id}
                           className="border-l-4 border-l-muted"
                         >
-                          <CardContent className="p-4">
+                          <CardContent className="p-3 sm:p-4">
                             <div className="flex items-start justify-between">
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2">
+                              <div className="flex-1 min-w-0">
+                                <div className="flex flex-wrap items-center gap-2 mb-2">
                                   <SeverityIcon
-                                    className={`w-4 h-4 ${
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0 ${
                                       severityColors[issue.severity]
                                     }`}
                                   />
                                   <CategoryIcon
-                                    className={`w-4 h-4 ${
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0 ${
                                       categoryColors[issue.category]
                                     }`}
                                   />
                                   <Badge variant="outline" className="text-xs">
                                     {issue.rule}
                                   </Badge>
-                                  <span className="text-sm text-muted-foreground">
+                                  <span className="text-xs sm:text-sm text-muted-foreground font-mono break-all">
                                     {issue.file}:{issue.line}
                                   </span>
                                 </div>
 
-                                <h4 className="font-medium mb-1">
+                                <h4 className="font-medium mb-1 text-sm sm:text-base">
                                   {issue.message}
                                 </h4>
 
                                 {issue.suggestion && (
-                                  <p className="text-sm text-muted-foreground mb-2">
+                                  <p className="text-xs sm:text-sm text-muted-foreground mb-2">
                                     💡 {issue.suggestion}
                                   </p>
                                 )}
 
                                 {issue.code && (
-                                  <div className="bg-muted p-2 rounded text-sm font-mono">
-                                    {issue.code}
+                                  <div className="bg-muted p-2 sm:p-3 rounded text-xs sm:text-sm font-mono overflow-x-auto">
+                                    <pre className="whitespace-pre-wrap break-words">{issue.code}</pre>
                                   </div>
                                 )}
                               </div>
@@ -455,7 +455,7 @@ function CodeReviewContent() {
               </TabsContent>
 
               <TabsContent value="categories" className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {Object.entries(analysisResult.issuesByCategory).map(
                     ([category, count]) => {
                       const CategoryIcon = categoryIcons[category];
@@ -465,20 +465,20 @@ function CodeReviewContent() {
 
                       return (
                         <Card key={category}>
-                          <CardContent className="p-4">
+                          <CardContent className="p-3 sm:p-4">
                             <div className="flex items-center gap-2 mb-2">
                               <CategoryIcon
-                                className={`w-5 h-5 ${categoryColors[category]}`}
+                                className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ${categoryColors[category]}`}
                               />
-                              <h3 className="font-medium capitalize">
+                              <h3 className="font-medium capitalize text-sm sm:text-base">
                                 {category}
                               </h3>
                             </div>
-                            <div className="text-2xl font-bold">{count}</div>
-                            <p className="text-sm text-muted-foreground">
+                            <div className="text-xl sm:text-2xl font-bold">{count}</div>
+                            <p className="text-xs sm:text-sm text-muted-foreground">
                               {percentage}% of total issues
                             </p>
-                            <Progress value={percentage} className="mt-2" />
+                            <Progress value={percentage} className="mt-2 h-1 sm:h-2" />
                           </CardContent>
                         </Card>
                       );
