@@ -18,9 +18,9 @@ function LoginContent() {
 
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
-      route.push("/dashboard");
+      route.replace("/dashboard");
     }
-  }, [isAuthenticated, authLoading, path]);
+  }, [isAuthenticated, authLoading, route]);
 
   useEffect(() => {
     const handleOAuthCallback = async () => {
@@ -28,14 +28,12 @@ function LoginContent() {
       const error = params.get("error");
 
       if (error) {
-        route.push("/dashboard");
-
-        // console.error("OAuth error:", error);
-        // alert(`GitHub authentication failed: ${error}. Please try again.`);
-        // // Clear the error from URL
-        // const newUrl = new URL(window.location);
-        // newUrl.searchParams.delete("error");
-        // window.history.replaceState({}, "", newUrl);
+        console.error("OAuth error:", error);
+        setIsLoading(false);
+        // Clear the error from URL
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.delete("error");
+        window.history.replaceState({}, "", newUrl);
         return;
       }
 
@@ -47,18 +45,16 @@ function LoginContent() {
           const newUrl = new URL(window.location);
           newUrl.searchParams.delete("token");
           window.history.replaceState({}, "", newUrl);
-          route.push("/dashboard");
+          // Don't redirect here - let the useEffect above handle it
         } catch (error) {
           console.error("Login failed:", error);
-          alert(`Login failed: ${error.message}. Please try again.`);
-        } finally {
           setIsLoading(false);
         }
       }
     };
 
     handleOAuthCallback();
-  }, [params, login, route]);
+  }, [params, login]);
 
   const handleGitHubLogin = async () => {
     setIsLoading(true);
@@ -79,7 +75,7 @@ function LoginContent() {
     }
   };
 
-  if (authLoading) {
+  if (authLoading || isAuthenticated) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
