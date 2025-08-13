@@ -1,12 +1,15 @@
 "use client";
+
+export const dynamic = 'force-dynamic';
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Github } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Login() {
+function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
   const route = useRouter();
   const path = usePathname();
@@ -147,5 +150,17 @@ export default function Login() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    }>
+      <LoginContent />
+    </Suspense>
   );
 }
