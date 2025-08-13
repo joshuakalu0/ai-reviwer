@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,7 +23,7 @@ import {
   Clock,
   BarChart3,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   semgrepAnalysisService,
@@ -58,7 +60,7 @@ const categoryColors = {
   style: "text-green-600",
 };
 
-export default function CodeReview() {
+function CodeReviewContent() {
   const searchParams = useSearchParams();
   const { user } = useAuth();
   const [analysisResult, setAnalysisResult] = useState(null);
@@ -489,5 +491,19 @@ export default function CodeReview() {
         </Card>
       </div>
     </DashboardLayout>
+  );
+}
+
+export default function CodeReview() {
+  return (
+    <Suspense fallback={
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+        </div>
+      </DashboardLayout>
+    }>
+      <CodeReviewContent />
+    </Suspense>
   );
 }
