@@ -1,6 +1,6 @@
 "use client";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -28,12 +28,14 @@ function LoginContent() {
       const error = params.get("error");
 
       if (error) {
-        console.error("OAuth error:", error);
-        alert(`GitHub authentication failed: ${error}. Please try again.`);
-        // Clear the error from URL
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.delete("error");
-        window.history.replaceState({}, "", newUrl);
+        route.push("/dashboard");
+
+        // console.error("OAuth error:", error);
+        // alert(`GitHub authentication failed: ${error}. Please try again.`);
+        // // Clear the error from URL
+        // const newUrl = new URL(window.location);
+        // newUrl.searchParams.delete("error");
+        // window.history.replaceState({}, "", newUrl);
         return;
       }
 
@@ -155,11 +157,13 @@ function LoginContent() {
 
 export default function Login() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      }
+    >
       <LoginContent />
     </Suspense>
   );
