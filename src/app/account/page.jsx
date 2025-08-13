@@ -97,7 +97,7 @@ export default function Account() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl space-y-8">
+      <div className="w-full space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>

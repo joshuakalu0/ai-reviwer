@@ -3,19 +3,19 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  GitBranch, 
-  Plus, 
-  Star, 
-  GitFork, 
-  Clock, 
-  TrendingUp, 
-  Activity, 
-  Users, 
-  Code, 
+import {
+  GitBranch,
+  Plus,
+  Star,
+  GitFork,
+  Clock,
+  TrendingUp,
+  Activity,
+  Users,
+  Code,
   Zap,
   ArrowRight,
-  RefreshCw
+  RefreshCw,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -121,7 +121,11 @@ export default function Dashboard() {
               Dashboard
             </h1>
             <p className="text-lg text-muted-foreground mt-2">
-              Welcome back, <span className="font-semibold text-foreground">{user?.name || user?.login}</span>! Here's your development overview.
+              Welcome back,{" "}
+              <span className="font-semibold text-foreground">
+                {user?.name || user?.login}
+              </span>
+              ! Here's your development overview.
             </p>
           </div>
           <div className="flex gap-3">
@@ -151,10 +155,15 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Repositories</p>
-                  <p className="text-3xl font-bold text-blue-600">{stats?.totalRepos || 0}</p>
+                  <p className="text-sm font-medium text-blue-700 dark:text-blue-300">
+                    Repositories
+                  </p>
+                  <p className="text-3xl font-bold text-blue-600">
+                    {stats?.totalRepos || 0}
+                  </p>
                   <p className="text-xs text-blue-600 mt-1">
-                    {stats?.publicRepos || 0} public • {stats?.privateRepos || 0} private
+                    {stats?.publicRepos || 0} public •{" "}
+                    {stats?.privateRepos || 0} private
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
@@ -168,9 +177,15 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-yellow-700 dark:text-yellow-300">Total Stars</p>
-                  <p className="text-3xl font-bold text-yellow-600">{stats?.totalStars || 0}</p>
-                  <p className="text-xs text-yellow-600 mt-1">Community appreciation</p>
+                  <p className="text-sm font-medium text-yellow-700 dark:text-yellow-300">
+                    Total Stars
+                  </p>
+                  <p className="text-3xl font-bold text-yellow-600">
+                    {stats?.totalStars || 0}
+                  </p>
+                  <p className="text-xs text-yellow-600 mt-1">
+                    Community appreciation
+                  </p>
                 </div>
                 <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
                   <Star className="w-6 h-6 text-yellow-600" />
@@ -183,9 +198,15 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-green-700 dark:text-green-300">Total Forks</p>
-                  <p className="text-3xl font-bold text-green-600">{stats?.totalForks || 0}</p>
-                  <p className="text-xs text-green-600 mt-1">Community contributions</p>
+                  <p className="text-sm font-medium text-green-700 dark:text-green-300">
+                    Total Forks
+                  </p>
+                  <p className="text-3xl font-bold text-green-600">
+                    {stats?.totalForks || 0}
+                  </p>
+                  <p className="text-xs text-green-600 mt-1">
+                    Community contributions
+                  </p>
                 </div>
                 <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
                   <GitFork className="w-6 h-6 text-green-600" />
@@ -198,8 +219,12 @@ export default function Dashboard() {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-purple-700 dark:text-purple-300">Activity</p>
-                  <p className="text-3xl font-bold text-purple-600">{recentRepos.length}</p>
+                  <p className="text-sm font-medium text-purple-700 dark:text-purple-300">
+                    Activity
+                  </p>
+                  <p className="text-3xl font-bold text-purple-600">
+                    {recentRepos.length}
+                  </p>
                   <p className="text-xs text-purple-600 mt-1">Recent updates</p>
                 </div>
                 <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center">
@@ -218,7 +243,9 @@ export default function Dashboard() {
                 <TrendingUp className="w-6 h-6 text-blue-600" />
                 Recent Activity
               </h2>
-              <p className="text-muted-foreground mt-1">Your most recently updated repositories</p>
+              <p className="text-muted-foreground mt-1">
+                Your most recently updated repositories
+              </p>
             </div>
             <Button variant="outline" size="sm" asChild className="group">
               <a href="/repositories" className="flex items-center gap-2">
@@ -273,19 +300,27 @@ export default function Dashboard() {
                               <div
                                 className="w-3 h-3 rounded-full"
                                 style={{
-                                  backgroundColor: getLanguageColor(repo.language),
+                                  backgroundColor: getLanguageColor(
+                                    repo.language
+                                  ),
                                 }}
                               ></div>
-                              <span className="font-medium">{repo.language}</span>
+                              <span className="font-medium">
+                                {repo.language}
+                              </span>
                             </div>
                           )}
                           <div className="flex items-center gap-1 text-yellow-600">
                             <Star className="w-4 h-4" />
-                            <span className="font-medium">{repo.stargazers_count}</span>
+                            <span className="font-medium">
+                              {repo.stargazers_count}
+                            </span>
                           </div>
                           <div className="flex items-center gap-1 text-green-600">
                             <GitFork className="w-4 h-4" />
-                            <span className="font-medium">{repo.forks_count}</span>
+                            <span className="font-medium">
+                              {repo.forks_count}
+                            </span>
                           </div>
                           <div className="flex items-center gap-1 text-muted-foreground">
                             <Clock className="w-4 h-4" />
@@ -320,10 +355,14 @@ export default function Dashboard() {
                     No Repositories Yet
                   </h3>
                   <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                    Start your coding journey by creating your first repository on GitHub.
+                    Start your coding journey by creating your first repository
+                    on GitHub.
                   </p>
                   <div className="flex gap-3 justify-center">
-                    <Button asChild className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                    <Button
+                      asChild
+                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    >
                       <a
                         href="https://github.com/new"
                         target="_blank"
@@ -354,38 +393,56 @@ export default function Dashboard() {
               Quick Actions
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button asChild variant="outline" className="h-auto p-4 justify-start">
+              <Button
+                asChild
+                variant="outline"
+                className="h-auto p-4 justify-start"
+              >
                 <a href="/create-project" className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
                     <Plus className="w-5 h-5 text-blue-600" />
                   </div>
                   <div className="text-left">
                     <div className="font-semibold">New Project</div>
-                    <div className="text-sm text-muted-foreground">Start AI code review</div>
+                    <div className="text-sm text-muted-foreground">
+                      Start AI code review
+                    </div>
                   </div>
                 </a>
               </Button>
-              
-              <Button asChild variant="outline" className="h-auto p-4 justify-start">
+
+              <Button
+                asChild
+                variant="outline"
+                className="h-auto p-4 justify-start"
+              >
                 <a href="/repositories" className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
                     <GitBranch className="w-5 h-5 text-green-600" />
                   </div>
                   <div className="text-left">
                     <div className="font-semibold">Browse Repos</div>
-                    <div className="text-sm text-muted-foreground">View all repositories</div>
+                    <div className="text-sm text-muted-foreground">
+                      View all repositories
+                    </div>
                   </div>
                 </a>
               </Button>
-              
-              <Button asChild variant="outline" className="h-auto p-4 justify-start">
-                <a href="/settings" className="flex items-center gap-3">
+
+              <Button
+                asChild
+                variant="outline"
+                className="h-auto p-4 justify-start"
+              >
+                <a href="/account" className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
                     <Users className="w-5 h-5 text-purple-600" />
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold">Settings</div>
-                    <div className="text-sm text-muted-foreground">Manage preferences</div>
+                    <div className="font-semibold">Accounts</div>
+                    <div className="text-sm text-muted-foreground">
+                      Manage preferences
+                    </div>
                   </div>
                 </a>
               </Button>

@@ -29,8 +29,8 @@ export default function Login() {
         alert(`GitHub authentication failed: ${error}. Please try again.`);
         // Clear the error from URL
         const newUrl = new URL(window.location);
-        newUrl.searchParams.delete('error');
-        window.history.replaceState({}, '', newUrl);
+        newUrl.searchParams.delete("error");
+        window.history.replaceState({}, "", newUrl);
         return;
       }
 
@@ -40,8 +40,8 @@ export default function Login() {
           await login(token);
           // Clear the token from URL for security
           const newUrl = new URL(window.location);
-          newUrl.searchParams.delete('token');
-          window.history.replaceState({}, '', newUrl);
+          newUrl.searchParams.delete("token");
+          window.history.replaceState({}, "", newUrl);
           route.push("/dashboard");
         } catch (error) {
           console.error("Login failed:", error);
@@ -58,7 +58,7 @@ export default function Login() {
   const handleGitHubLogin = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/auth/github');
+      const response = await fetch("/api/auth/github");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -68,7 +68,7 @@ export default function Login() {
       }
       window.location.href = data.url;
     } catch (error) {
-      console.error('Failed to initiate GitHub login:', error);
+      console.error("Failed to initiate GitHub login:", error);
       alert(`Failed to start GitHub login: ${error.message}`);
       setIsLoading(false);
     }
@@ -90,7 +90,7 @@ export default function Login() {
             <div className="w-6 h-6 bg-background rounded-sm"></div>
           </div>
           <h1 className="text-2xl font-semibold text-foreground mb-2">
-            Welcome to RepoHub
+            Welcome to AI Debugger
           </h1>
           <p className="text-muted-foreground">
             Connect your GitHub repositories and manage them with ease

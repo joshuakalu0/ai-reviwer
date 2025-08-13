@@ -10,11 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Home,
   GitBranch,
@@ -33,9 +29,7 @@ import { useTheme } from "next-themes";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
-  { name: "Repositories", href: "/repositories", icon: GitBranch },
-  { name: "AI Code Review", href: "/ai-code-review", icon: Brain },
-  { name: "Settings", href: "/settings", icon: Settings },
+  // { name: "Repositories", href: "/repositories", icon: GitBranch },
   { name: "Account", href: "/account", icon: User },
 ];
 
@@ -55,7 +49,11 @@ export function DashboardLayout({ children }) {
       {/* Mobile sidebar */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="sm" className="lg:hidden fixed top-4 left-4 z-50">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="lg:hidden fixed top-4 left-4 z-50"
+          >
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
@@ -67,7 +65,9 @@ export function DashboardLayout({ children }) {
                 <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center">
                   <div className="w-4 h-4 bg-background rounded-sm"></div>
                 </div>
-                <span className="font-semibold text-foreground">RepoHub</span>
+                <span className="font-semibold text-foreground">
+                  AI debugger
+                </span>
               </div>
             </div>
 
@@ -97,16 +97,28 @@ export function DashboardLayout({ children }) {
             <div className="border-t p-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-3 h-auto p-3"
+                  >
                     <Avatar className="w-8 h-8">
-                      <AvatarImage src={user?.avatar_url} alt={user?.name || user?.login} />
+                      <AvatarImage
+                        src={user?.avatar_url}
+                        alt={user?.name || user?.login}
+                      />
                       <AvatarFallback>
-                        {(user?.name || user?.login || "U").charAt(0).toUpperCase()}
+                        {(user?.name || user?.login || "U")
+                          .charAt(0)
+                          .toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 text-left">
-                      <div className="text-sm font-medium">{user?.name || user?.login}</div>
-                      <div className="text-xs text-muted-foreground">{user?.email}</div>
+                      <div className="text-sm font-medium">
+                        {user?.name || user?.login}
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {user?.email}
+                      </div>
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
@@ -117,13 +129,7 @@ export function DashboardLayout({ children }) {
                       Account
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link href="/settings">
-                      <Settings className="w-4 h-4 mr-2" />
-                      Settings
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign out
@@ -144,7 +150,7 @@ export function DashboardLayout({ children }) {
               <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center">
                 <div className="w-4 h-4 bg-background rounded-sm"></div>
               </div>
-              <span className="font-semibold text-foreground">RepoHub</span>
+              <span className="font-semibold text-foreground">AI Debugger</span>
             </div>
           </div>
 
@@ -180,16 +186,28 @@ export function DashboardLayout({ children }) {
           <div className="border-t pt-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3">
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start gap-3 h-auto p-3"
+                >
                   <Avatar className="w-8 h-8">
-                    <AvatarImage src={user?.avatar_url} alt={user?.name || user?.login} />
+                    <AvatarImage
+                      src={user?.avatar_url}
+                      alt={user?.name || user?.login}
+                    />
                     <AvatarFallback>
-                      {(user?.name || user?.login || "U").charAt(0).toUpperCase()}
+                      {(user?.name || user?.login || "U")
+                        .charAt(0)
+                        .toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 text-left">
-                    <div className="text-sm font-medium">{user?.name || user?.login}</div>
-                    <div className="text-xs text-muted-foreground">{user?.email}</div>
+                    <div className="text-sm font-medium">
+                      {user?.name || user?.login}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {user?.email}
+                    </div>
                   </div>
                 </Button>
               </DropdownMenuTrigger>
@@ -200,13 +218,7 @@ export function DashboardLayout({ children }) {
                     Account
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings">
-                    <Settings className="w-4 h-4 mr-2" />
-                    Settings
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="w-4 h-4 mr-2" />
                   Sign out
@@ -221,7 +233,6 @@ export function DashboardLayout({ children }) {
       <div className="lg:pl-64">
         {/* Top bar */}
         <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1"></div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
@@ -249,9 +260,7 @@ export function DashboardLayout({ children }) {
 
         {/* Page content */}
         <main className="py-10">
-          <div className="px-4 sm:px-6 lg:px-8">
-            {children}
-          </div>
+          <div className="px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
     </div>

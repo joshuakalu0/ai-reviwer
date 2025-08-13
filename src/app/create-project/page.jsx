@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { githubAPI, getLanguageColor, formatDate } from "@/lib/github";
 import { useRouter } from "next/navigation";
+import { FileText } from "lucide-react";
 
 const ProjectSkeleton = () => (
   <div className="border rounded-lg p-4">
@@ -99,6 +100,9 @@ export default function CreateProject() {
   const handleSelectRepo = (repo) => {
     router.push(`/ai-code-review?repo=${repo.full_name}`);
   };
+  const handleSelectRepoScan = (repo) => {
+    router.push(`/code-review?repo=${encodeURIComponent(repo.full_name)}`);
+  };
 
   if (error) {
     return (
@@ -123,7 +127,8 @@ export default function CreateProject() {
             Create New Project
           </h1>
           <p className="text-lg text-muted-foreground mt-2">
-            Import a Git repository to get started with AI-powered code review and analysis
+            Import a Git repository to get started with AI-powered code review
+            and analysis
           </p>
         </div>
 
@@ -136,7 +141,7 @@ export default function CreateProject() {
                 <GitBranch className="w-6 h-6 text-muted-foreground" />
                 <h2 className="text-xl font-semibold">Import Git Repository</h2>
               </div>
-              
+
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -189,7 +194,9 @@ export default function CreateProject() {
                                   <div
                                     className="w-2 h-2 rounded-full"
                                     style={{
-                                      backgroundColor: getLanguageColor(repo.language),
+                                      backgroundColor: getLanguageColor(
+                                        repo.language
+                                      ),
                                     }}
                                   ></div>
                                   {repo.language}
@@ -206,6 +213,14 @@ export default function CreateProject() {
                             </div>
                           </div>
                           <Button
+                            onClick={() => handleSelectRepoScan(repo)}
+                            variant="outline"
+                            size="sm"
+                          >
+                            <FileText className="w-3 h-3 mr-1" />
+                            Semgrep Scan
+                          </Button>
+                          <Button
                             onClick={() => handleSelectRepo(repo)}
                             className="ml-4"
                             size="sm"
@@ -220,7 +235,9 @@ export default function CreateProject() {
                   <div className="text-center py-8">
                     <GitBranch className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
                     <h3 className="font-semibold text-foreground mb-1">
-                      {searchTerm ? "No repositories found" : "No repositories yet"}
+                      {searchTerm
+                        ? "No repositories found"
+                        : "No repositories yet"}
                     </h3>
                     <p className="text-sm text-muted-foreground">
                       {searchTerm
@@ -236,7 +253,9 @@ export default function CreateProject() {
           {/* Right Column - Features */}
           <div className="space-y-6">
             <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">Why Choose AI Code Review?</h2>
+              <h2 className="text-xl font-semibold mb-4">
+                Why Choose AI Code Review?
+              </h2>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center shrink-0">
@@ -245,11 +264,12 @@ export default function CreateProject() {
                   <div>
                     <h3 className="font-semibold mb-1">AI-Powered Analysis</h3>
                     <p className="text-sm text-muted-foreground">
-                      Advanced AI algorithms analyze your code for bugs and optimization opportunities
+                      Advanced AI algorithms analyze your code for bugs and
+                      optimization opportunities
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center shrink-0">
                     <Zap className="w-5 h-5 text-green-600" />
@@ -257,11 +277,12 @@ export default function CreateProject() {
                   <div>
                     <h3 className="font-semibold mb-1">Instant Feedback</h3>
                     <p className="text-sm text-muted-foreground">
-                      Get immediate insights to improve code quality and performance
+                      Get immediate insights to improve code quality and
+                      performance
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center shrink-0">
                     <Shield className="w-5 h-5 text-purple-600" />
@@ -269,7 +290,8 @@ export default function CreateProject() {
                   <div>
                     <h3 className="font-semibold mb-1">Security First</h3>
                     <p className="text-sm text-muted-foreground">
-                      Comprehensive security scanning to identify vulnerabilities
+                      Comprehensive security scanning to identify
+                      vulnerabilities
                     </p>
                   </div>
                 </div>
@@ -280,15 +302,21 @@ export default function CreateProject() {
               <h3 className="font-semibold mb-3">Getting Started</h3>
               <div className="space-y-3 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">1</div>
+                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">
+                    1
+                  </div>
                   <span>Search and select your repository</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">2</div>
+                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">
+                    2
+                  </div>
                   <span>AI analyzes your codebase</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">3</div>
+                  <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-semibold">
+                    3
+                  </div>
                   <span>Review insights and recommendations</span>
                 </div>
               </div>
